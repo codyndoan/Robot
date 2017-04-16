@@ -65,6 +65,7 @@ public class Robot {
   }
 
   public static void findPosition(int xCoord, int yCoord, char direction, String actions) {
+    actions = actions.replace(",", "");
     currentDirection = direction;
     x = xCoord;
     y = yCoord;
@@ -88,14 +89,14 @@ public class Robot {
   public static void main (String[] args) {
 
     Robot bob = new Robot();
-    Robot.findPosition(4, 3, 'N', "MMMLMMMMRRR");
+    Robot.findPosition(4, 3, 'N', "M,M,M,L,M,M,M,M,R,R,R");
 
     for (int[] rows : board) {
       System.out.println(Arrays.toString(rows));
     }
 
-    System.out.println(currentPlace);
-    System.out.println(currentDirection);
+    System.out.println("Location: " + currentPlace);
+    System.out.println("Direction faced: " + currentDirection);
 
   } 
 }
