@@ -31,7 +31,6 @@ class boardGame {
         if (this.yPosition === undefined) this.yPosition = "not valid";
         this.currentPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
         document.getElementById("location").innerHTML = "Location: " + this.currentPosition;
-        console.log(origin);
     }
     
     /* Set Robot's action path M, R, L*/
@@ -56,7 +55,6 @@ class boardGame {
     
     begin() {
         this.findPosition(this.xPosition, this.yPosition, this.currentDirection, this.actions);
-        console.log(this.currentPosition);
     }
     
     findPosition(x, y, direction, actions) {
