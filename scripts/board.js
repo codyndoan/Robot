@@ -5,20 +5,12 @@ class boardGame {
 
         this.board = [];
         for (var i = 0; i < 8; i++) this.board.push([0,0,0,0,0,0,0,0]);
-        
-        if (arguments.length != 4) {
-            this.xCoordinate = 1;
-            this.yCoordinate = 1;
-            this.currentPosition = "[" + this.xCoordinate + ", " + this.yCoordinate + "]";
-            this.currentDirection = 'N';
-            this.actions = '';
-        } else {
-            this.xCoordinate = x;
-            this.yCoordinate = y;
-            this.currentPosition = "[" + this.xCoordinate + ", " + this.yCoordinate + "]";
-            this.currentDirection = direction;
-            this.actions = actions;   
-        }
+    
+        this.xPosition = x;
+        this.yPosition = y;
+        this.currentPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
+        this.currentDirection = direction;
+        this.actions = actions;   
         
         /* Setup Hashmap, mapping direction to index */
         this.directions = ['N', 'E', 'S', 'W'];
@@ -31,9 +23,13 @@ class boardGame {
     
     /* Set Robot's starting position */
     setOrigin() {
-        var input, origin;
-        input = document.getElementById("origin-input");
-        origin = input.value;
+        var originInput = document.getElementById("origin-input").value;
+        originInput = originInput.replace(/[^1-8]+/g, "");
+        this.xPosition = originInput[0];
+        this.yPosition = originInput[1];
+        if (this.xPosition === undefined) this.xPosition = "not valid";
+        if (this.yPosition === undefined) this.yPosition = "not valid";
+        this.currentPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
         document.getElementById("location").innerHTML = "Location: " + this.currentPosition;
         console.log(origin);
     }
@@ -59,7 +55,7 @@ class boardGame {
     }
     
     begin() {
-        this.findPosition(this.xCoordinate, this.yCoordinate, this.currentDirection, this.actions);
+        this.findPosition(this.xPosition, this.yPosition, this.currentDirection, this.actions);
         console.log(this.currentPosition);
     }
     
@@ -80,35 +76,35 @@ class boardGame {
       }
     
     move() {
-        // Convert x and y coordinates to matrix indices
 
         switch(this.currentDirection) {
           case 'N':
-            if ( ++this.yCoordinate > 8) this.yCoordinate--;
+            if ( ++this.yPosition > 8) this.yPosition--;
             break;
 
           case 'E':
-            if ( ++this.xCoordinate > 8) this.xCoordinate--;
+            if ( ++this.xPosition > 8) this.xPosition--;
             break;
 
           case 'S':
-            if ( --this.yCoordinate < 1) this.yCoordinate++;
+            if ( --this.yPosition < 1) this.yPosition++;
             break;
 
           case 'W':
-            if ( --this.xCoordinate < 1) this.yCoordinate++;
+            if ( --this.xPosition < 1) this.xPosition++;
             break;
 
           default:
             break;
         }
 
-        var row = 7 - (this.yCoordinate - 1);
-        var col = this.yCoordinate - 1;
+        // Convert x and y Positions to matrix indices
+        var row = 7 - (this.yPosition - 1);
+        var col = this.yPosition - 1;
 
         this.board[row][col]++;
 
-        this.currentPosition = "[" + this.xCoordinate + ", " + this.yCoordinate + "]";
+        this.currentPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
         document.getElementById("location").innerHTML = "Location: " + this.currentPosition;
         document.getElementById("direction").innerHTML = "Direction faced: " + this.currentDirection;
   }
@@ -130,4 +126,4 @@ class boardGame {
     }
 }
 
-var myBoard = new boardGame();
+var myBoard = new boardGame(1, 1, 'N', "");
