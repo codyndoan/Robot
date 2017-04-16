@@ -4,8 +4,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use("/styles",  express.static(path.join(__dirname + '/styles')));
-app.use("/scripts", express.static(__dirname + '/scripts'));
+app.use(express.static(__dirname + '/styles'));
+app.use(express.static(__dirname + '/scripts'));
 
 app.set('port', (process.env.PORT || 8000))
 
