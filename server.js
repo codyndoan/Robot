@@ -25,6 +25,6 @@ app.get('/styles/animate.css', function(req, res){
   res.sendFile(__dirname + '/styles/animate.css');
 });
 
-app.get('/scripts/board.js', function(req, res){
-  res.sendFile(__dirname + '/scripts/board.js');
+app.get('/scripts/robot.js', function(req, res){
+  res.sendFile(__dirname + '/scripts/robot.js');
 });
