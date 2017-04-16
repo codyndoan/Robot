@@ -16,3 +16,15 @@ app.listen(app.get('port'), () => {
 app.get('/', (request, response) => {
   response.sendFile(__dirname + '/index.html')
 })
+
+app.get('/styles/index.css', function(req, res){
+  res.sendFile(__dirname + '/styles/index.css');
+});
+
+app.get('/styles/animate.css', function(req, res){
+  res.sendFile(__dirname + '/styles/animate.css');
+});
+
+app.get('/scripts/board.js', function(req, res){
+  res.sendFile(__dirname + '/scripts/board.js');
+});
