@@ -20,7 +20,7 @@ class boardGame {
         var input, origin;
         input = document.getElementById("origin-input");
         origin = input.value;
-        document.getElementById("location").innerHTML = "Location: " + orgin;
+        document.getElementById("location").innerHTML = "Location: " + origin;
         console.log(origin);
     }
     
