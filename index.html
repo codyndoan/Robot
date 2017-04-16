@@ -10,11 +10,12 @@
     <body>
         
         <form>
-            <input id="origin-input" placeholder="[x,y]" onkeyup="myBoard.setOrigin();">
+            <input id="origin-input" placeholder="[x, y]" value="[x,y]" onkeyup="myBoard.setOrigin();">
+            <span>[ , ]</span>
             <input id="direction-input" placeholder="'N', 'E', 'S', 'W'" onkeyup="myBoard.setDirection('Z', true)">
             <input id="action-input" placeholder="M, R, L" onkeyup="myBoard.setAction()">
         </form>
-        <button onclick="myBoard.begin()">start</button>
+        <button onclick="myBoard.begin()">step</button>
         <div id="location">Location: </div>
         <div id="direction">Direction faced: </div>
         
