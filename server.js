@@ -30,6 +30,10 @@ app.get('/scripts/robot.js', function(req, res){
   res.sendFile(__dirname + '/scripts/robot.js');
 });
 
+app.get('/scripts/board.js', function(req, res){
+  res.sendFile(__dirname + '/scripts/board.js');
+});
+
 app.get('/images/robot.png', function(req, res){
   res.sendFile(__dirname + '/images/robot.png');
 });

@@ -22,7 +22,12 @@
         
     <footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="./scripts/robot.js"></script> 
+        <script src="./scripts/robot.js"></script>
+        <script src="./scripts/board.js"></script>
+        <script>
+            var myBoard = new Board();
+            var myRobot = new Robot("x", "y", "", "", myBoard);
+        </script>
     </footer>
     </body>
 </html>

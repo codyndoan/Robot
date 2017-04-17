@@ -1,5 +1,7 @@
 body {
-    padding-top: 15%;
+    padding-top: 5%;
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 #robot {
     display: none;
