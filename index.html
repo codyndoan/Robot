@@ -5,18 +5,19 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="./styles/index.css"/>
         <link rel="stylesheet" type="text/css" href="./styles/animate.css"/>
+        <title>Cody's Robot Game</title>
     </head>
     
     <body>
         <span id="position-title">Original Position:</span> <span id="direction-title">Original Direction:</span>
         <form>
             <input id="origin-input" placeholder="[x, y]" onkeyup="myRobot.setPosition(true);" class="text-center" type="text">
-            <input id="direction-input" placeholder="N, E, S, or W" onkeyup="myRobot.setDirection(this.value, true)" class="text-center" type="text">
-            <br><span id="action-title">Actions:</span><br>
-            <input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction()" class="text-center" type="text">
+            <input id="direction-input" placeholder="N, S, E, or W" onkeyup="myRobot.setDirection(this.value, true)" class="text-center" type="text">
+            <br><span id="action-title">Actions: [M]ove, [R]ight, [L]eft</span><br>
+            <input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction();" class="text-center" type="text">
         </form><br>
-        <button id="start-button" onclick="myRobot.begin()">start</button>
-        <button id="reset-button" onclick="myRobot.begin(true)">reset</button><br><br>
+        <button id="start-button" onclick="myRobot.begin();">start</button>
+        <button id="reset-button" onclick="myRobot.begin(true);">reset</button><br><br>
         <div id="location">Location: </div>
         <div id="direction">Direction faced: </div>
         <canvas id="grid" width="435" height="435"></canvas> <br>  
