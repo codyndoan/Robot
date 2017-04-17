@@ -1,0 +1,57 @@
+body {
+    padding-top: 15%;
+}
+#robot {
+    display: none;
+}
+
+#origin-input {
+    position: relative;;
+    width: 25%;
+    left: 25%;
+    padding: 0px;
+}
+
+#direction-input {
+    position: relative;;
+    width: 25%;
+    left: 25%;
+    padding: 0px;
+}
+
+#action-input {
+    position: relative;;
+    width: 50%;
+    left: 25%;
+}
+
+#start-button {
+    position: relative;;
+    width: 12.5%;
+    left: 37.5%;
+}
+
+#reset-button {
+    position: relative;;
+    width: 12.5%;
+    left: 37.5%;
+}
+
+#location {
+    position: relative;;
+    width: 50%;
+    left: 25%;
+}
+
+#direction {
+    position: relative;;
+    width: 50%;
+    left: 25%;
+}
+
+#grid {
+    position: fixed;
+    width: 50%;
+    left: 25%;
+    margin: 0, auto;
+}

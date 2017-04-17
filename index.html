@@ -8,17 +8,17 @@
     </head>
     
     <body>
-        
-        <form>
-            <input id="origin-input" placeholder="[x, y]" onkeyup="myRobot.setPosition(true);">
-            <input id="direction-input" placeholder="'N', 'E', 'S', 'W'" onkeyup="myRobot.setDirection('Z', true)">
-            <input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction()">
+        <img id="robot" src="./images/robot.png" width="50" height="50">
+        <form class ="">
+            <input id="origin-input" placeholder="[x, y]" onkeyup="myRobot.setPosition(true);" class="text-center" type="text">
+            <input id="direction-input" placeholder="N, E, S, or W" onkeyup="myRobot.setDirection(this.value, true)" class="text-center" type="text">
+            <br><input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction()" class="text-center" type="text">
         </form>
-        <button onclick="myRobot.begin()">step</button>
-        <button onclick="myBoard.reset()">reset</button>
+        <button id="start-button" onclick="myRobot.begin()">start</button>
+        <button id="reset-button" onclick="myRobot.begin(true)">reset</button>
         <div id="location">Location: </div>
         <div id="direction">Direction faced: </div>
-        <div id="grid"></div>
+        <canvas id="grid" width="435" height="435"></canvas>   
         
     <footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

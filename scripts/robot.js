@@ -3,14 +3,46 @@ class Board {
         // Board Representation 8x8
         this.board = [];
         for (var i = 0; i < 8; i++) this.board.push([0,0,0,0,0,0,0,0]);
+        
+        this.red = 0;
+        this.green = 0;
+        this.blue = 0;
+        this.ctx = document.getElementById('grid').getContext('2d');
+        this.size = 50;
+        this.offset = 5;
+        
+        /* Visualize grid */
+        for (var row = 0; row < 8; row++) {
+            for (var col = 0; col < 8; col++) {
+                this.ctx.fillStyle = "rgb(200,200,200)";
+                this.ctx.fillRect(col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
+            }
+        }
     }
     
-    update(xPosition, yPosition) {
+    update(xPosition, yPosition, lastx, lasty) {
         /* Convert to matrix indices */
         var row = 7 - (yPosition - 1);
         var col = xPosition - 1;
-        console.log("[" + row + "][" + col + "]");
         this.board[row][col]++;
+        
+        var degree = this.red++*35;
+    
+        if (degree >= 240) {
+            var degree1 = this.green++*15;
+            var degree2 = this.blue++*5;
+            if (degree1 >= 100) degree1 = 100;
+            if (degree2 >= 140) degree2 = 140;
+            this.ctx.fillStyle = "rgb(240," + degree1 + "," + degree2+ ")";
+        } else {
+            this.ctx.fillStyle = "rgb(" + degree + ",0,0)";
+        }
+        
+        var img = document.getElementById('robot');
+        
+        this.ctx.fillRect(col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
+        this.ctx.drawImage (img, col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
+        
     }
     
     toString() {
@@ -18,12 +50,25 @@ class Board {
         for (var i = 0; i < 8; i++) {
             boardString += this.board[i] + '\n';
         }
-        document.getElementById("grid").innerHTML = boardString;
         return boardString;
     }
     
-    reset() {
+    reset(originPosition, originDirection) {
+        this.red = 0;
+        this.blue = 0;
+        this.green = 0;
+        
+        /* Clear board */
         for (var i = 0; i < 8; i++) this.board[i] = [0,0,0,0,0,0,0,0];
+        for (var row = 0; row < 8; row++) {
+            for (var col = 0; col < 8; col++) {
+                this.ctx.fillStyle = "rgb(200,200,200)";
+                this.ctx.fillRect (col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
+            }
+        }
+        
+        document.getElementById("location").innerHTML = "Location: " + originPosition;
+        document.getElementById("direction").innerHTML = "Direction faced: " + originDirection;
         console.log(this.toString());
     }
 }
@@ -35,9 +80,11 @@ class Robot {
         // Current Coordinate of Robot
         this.xPosition = x;
         this.yPosition = y;
+        this.originPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
         this.currentPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
         
         // Current Direction of Robot
+        this.originDirection = direction;
         this.currentDirection = direction;
         
         // Current Action path of Robot
@@ -48,7 +95,8 @@ class Robot {
         this.dir_map = {'N': 0, 'E': 1, 'S': 2, 'W': 3};
         
         this.board = board;
-        this.origin = 0;
+        
+        this.speed = 100;
     }
     
     /* Set Robot's starting position */
@@ -60,13 +108,16 @@ class Robot {
             this.yPosition = positionInput[1];
             if (this.xPosition === undefined || !this.xPosition) this.xPosition = "x";
             if (this.yPosition === undefined || !this.yPosition) this.yPosition = "y";
+            this.originPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
         }
+        
         this.currentPosition = "[" + this.xPosition + ", " + this.yPosition + "]";
+        
         document.getElementById("location").innerHTML = "Location: " + this.currentPosition;
         
         /* Update position on board */
-        if (!fromInput)
-            this.board.update(this.xPosition, this.yPosition);
+        if (!fromInput)  this.board.update(this.xPosition, this.yPosition);
+            
     }
     
     /* Set Robot's action path M, R, L*/
@@ -74,38 +125,50 @@ class Robot {
         /* Error Checking */
         var actionInput = document.getElementById("action-input").value;
         /* Remove all invalid characters from action string */
-        actionInput = actionInput.replace(/[^MLR]+/g, "");
+        actionInput = actionInput.replace(/[^mlrMLR]+/g, "");
         actionInput = actionInput.toUpperCase();
         this.actions = actionInput;
     }
     
     /* Set Robot's direction */
     setDirection(direction, fromInput) {
-        /* Setting from input */
-        if (fromInput) var direction = document.getElementById("direction-input").value.toUpperCase();
         /* Error Checking */
         if (direction != 'N' && direction != 'E' && direction != 'S' && direction != 'W' && direction != '') return;
         
-        this.currentDirection = direction;
+        /* Setting from input */
+        this.originDirection = document.getElementById("direction-input").value;
+        if (fromInput) this.currentDirection = this.originDirection;
+        else this.currentDirection = direction;
         document.getElementById("direction").innerHTML = "Direction faced: " + this.currentDirection;
     }
     
-    begin() {
-        /* Mark current position in matrix */
-        if (this.origin == 0) this.board.update(this.xPosition, this.yPosition);
-        this.origin++;
-        this.findPosition(this.xPosition, this.yPosition, this.currentDirection, this.actions);
-        console.log(this.board.toString());
+    begin(resetOnly) {
+        /* Reset board */
+        this.board.reset(this.originPosition, this.originDirection);
+        if (resetOnly) return;
+        
+        this.setPosition(true);
+        this.setDirection(this.originDirection, true);
+        
+        /* Only move robot once, x and y have been set */
+        if (this.xPosition != "x" && this.yPosition != "y" ) {
+            this.board.update(this.xPosition, this.yPosition);
+            this.performActions(this.actions);
+            console.log(this.board.toString());
+            console.log(document.getElementById("location").innerHTML);
+            console.log(document.getElementById("direction").innerHTML);
+        }
     }
     
-    findPosition(x, y, direction, actions) {
-        this.currentPosition = "[" + x + ", " + y + "]";
-
+    performActions(actions) {
+        /* Let robot follow action path */
         for (var i = 0; i < this.actions.length; i++) {
-          var action = actions.charAt(i);
-          if (action == 'M') this.move();
-          if (action == 'L') this.turn(this.currentDirection, action);
-          if (action == 'R') this.turn(this.currentDirection, action);
+            setTimeout(function(actions, i) {
+                var action = actions.charAt(i).toUpperCase();
+                if (action == 'M') this.move();
+                if (action == 'L') this.turn(this.currentDirection, action);
+                if (action == 'R') this.turn(this.currentDirection, action);
+            }.bind(this), this.speed*i, actions, i);
         }
     }
     
@@ -136,26 +199,27 @@ class Robot {
           default:
             break;
         }
-        // set Robot's position
+        /* set Robot's position */
         this.setPosition(false);
     }
 
     /* turn left or right */
     turn(direction, turn) {
-        // Get enumeration for current direction
+        /* Get enumeration for current direction*/
         var current = this.dir_map[direction];
 
-        // Get index of next direction based on turn and make bound check resolutions if needed
+        /* Get index of next direction based on turn and make bound check resolutions if needed*/
         if (turn == 'L') {
             if (--current < 0) current += this.directions.length;
         } else {
             if (++current >= this.directions.length) current %= this.directions.length;
         }
 
-        // Set new direction faced
+        /* Set new direction faced */
         this.setDirection(this.directions[current], false);
     }
+    
 }
 
 var myBoard = new Board();
-var myRobot = new Robot(1, 1, 'N', "", myBoard);
+var myRobot = new Robot("x", "y", "", "", myBoard);

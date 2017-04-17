@@ -6,6 +6,7 @@ var app = express();
 
 app.use(express.static(__dirname + '/styles'));
 app.use(express.static(__dirname + '/scripts'));
+app.use(express.static(__dirname + '/images'));
 
 app.set('port', (process.env.PORT || 8000))
 
@@ -27,4 +28,8 @@ app.get('/styles/animate.css', function(req, res){
 
 app.get('/scripts/robot.js', function(req, res){
   res.sendFile(__dirname + '/scripts/robot.js');
+});
+
+app.get('/images/robot.png', function(req, res){
+  res.sendFile(__dirname + '/images/robot.png');
 });
