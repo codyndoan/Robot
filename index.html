@@ -8,18 +8,21 @@
     </head>
     
     <body>
-        <img id="robot" src="./images/robot.png" width="50" height="50">
-        <form class ="">
+        <span id="position-title">Original Position:</span> <span id="direction-title">Original Direction:</span>
+        <form>
             <input id="origin-input" placeholder="[x, y]" onkeyup="myRobot.setPosition(true);" class="text-center" type="text">
             <input id="direction-input" placeholder="N, E, S, or W" onkeyup="myRobot.setDirection(this.value, true)" class="text-center" type="text">
-            <br><input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction()" class="text-center" type="text">
-        </form>
+            <br><span id="action-title">Actions:</span><br>
+            <input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction()" class="text-center" type="text">
+        </form><br>
         <button id="start-button" onclick="myRobot.begin()">start</button>
-        <button id="reset-button" onclick="myRobot.begin(true)">reset</button>
+        <button id="reset-button" onclick="myRobot.begin(true)">reset</button><br><br>
         <div id="location">Location: </div>
         <div id="direction">Direction faced: </div>
-        <canvas id="grid" width="435" height="435"></canvas>   
-        
+        <canvas id="grid" width="435" height="435"></canvas> <br>  
+        <span id="speed-text">Animation Speed: 100 ms</span><input id="slider" type="range" min="0" max="400" value="100" step="10" onchange="myRobot.changeSpeed()"/>
+        <img id="robot" src="./images/robot.png" width="50" height="50">
+    
     <footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="./scripts/robot.js"></script>

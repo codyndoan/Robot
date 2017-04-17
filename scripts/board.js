@@ -14,25 +14,26 @@ class Board {
         /* Visualize grid */
         for (var row = 0; row < 8; row++) {
             for (var col = 0; col < 8; col++) {
-                this.ctx.fillStyle = "rgb(200,200,200)";
+                this.ctx.fillStyle = "rgb(240,240,240)";
                 this.ctx.fillRect(col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
             }
         }
     }
     
+    /* Update Board Visualization */
     update(xPosition, yPosition) {
         /* Convert to matrix indices */
         var row = 7 - (yPosition - 1);
         var col = xPosition - 1;
         this.board[row][col]++;
         
-        var degree = this.red++*35;
+        var degree = this.red++*25;
     
         if (degree >= 240) {
             var degree1 = this.green++*15;
-            var degree2 = this.blue++*5;
-            if (degree1 >= 100) degree1 = 100;
-            if (degree2 >= 140) degree2 = 140;
+            var degree2 = this.blue++*10;
+            if (degree1 >= 150) degree1 = 150;
+            if (degree2 >= 200) degree2 = 200;
             this.ctx.fillStyle = "rgb(240," + degree1 + "," + degree2+ ")";
         } else {
             this.ctx.fillStyle = "rgb(" + degree + ",0,0)";
@@ -62,7 +63,7 @@ class Board {
         for (var i = 0; i < 8; i++) this.board[i] = [0,0,0,0,0,0,0,0];
         for (var row = 0; row < 8; row++) {
             for (var col = 0; col < 8; col++) {
-                this.ctx.fillStyle = "rgb(200,200,200)";
+                this.ctx.fillStyle = "rgb(240,240,240)";
                 this.ctx.fillRect (col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
             }
         }

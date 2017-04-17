@@ -85,6 +85,11 @@ public class Robot {
     }
   }
   
+  /* Try all possible actions with number of actions maximum */
+  public static void findPossible(int xOrigin, int yOrigin, char dirOrign, int xTarget, int yTarget, char
+  dirTarget, int maxActions) {
+  }
+
 
   public static void main (String[] args) {
 
@@ -97,6 +102,8 @@ public class Robot {
 
     System.out.println("Location: " + currentPlace);
     System.out.println("Direction faced: " + currentDirection);
+
+    Robot.findPossible(2, 3,'N', 3, 4, 'S', 4);
 
   } 
 }

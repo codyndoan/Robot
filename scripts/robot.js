@@ -22,7 +22,7 @@ class Robot {
         
         this.board = board;
         
-        this.speed = 100;
+        this.speed = 0;
     }
     
     /* Set Robot's starting position */
@@ -145,6 +145,11 @@ class Robot {
 
         /* Set new direction faced */
         this.setDirection(this.directions[current], false);
+    }
+    
+    changeSpeed() {
+        this.speed = document.getElementById('slider').value;
+        document.getElementById('speed-text').innerHTML = "Animation Speed: " + this.speed + " ms";
     }
     
 }
