@@ -33,8 +33,8 @@ class Board {
         if (degree >= 255) {
             var degree1 = 75 + this.green++*13;
             var degree2 = 100 + this.blue++*10;
-            if (degree1 >= 240) degree1 -= 240;
-            if (degree2 >= 250) degree2 -= 250;
+            if (degree1 >= 240) degree1 = 240;
+            if (degree2 >= 250) degree2 = 250;
             this.ctx.fillStyle = "rgb(255," + degree1 + "," + degree2+ ")";
         } else {
             this.ctx.fillStyle = "rgb(" + degree + ",75,100)";
