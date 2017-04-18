@@ -63,7 +63,7 @@ class Robot {
         document.getElementById("location").innerHTML = "Location: " + this.currentPosition;
         
         /* Update position on board */
-        if (!fromInput)  this.board.update(this.xPosition, this.yPosition);
+        if (!fromInput)  this.board.update(this.xPosition, this.yPosition, this.currentDirection);
             
     }
     
@@ -99,7 +99,10 @@ class Robot {
         if (fromInput)  {
             this.originDirection = direction;
             this.currentDirection = this.originDirection;
-        } else this.currentDirection = direction;
+        } else {
+            this.currentDirection = direction;
+            this.board.update(this.xPosition, this.yPosition, this.currentDirection);
+        }
 
         /* Update page */
         document.getElementById("direction").innerHTML = "Direction faced: " + this.currentDirection;
@@ -134,7 +137,7 @@ class Robot {
         
         /* Only update board once x and y positions have been set else alert user*/
         if (this.xPosition != "x" && this.yPosition != "y" ) {
-            this.board.update(this.xPosition, this.yPosition);
+            this.board.update(this.xPosition, this.yPosition, this.currentDirection);
             /* Only perform actions if an initial direction has been set else alert user */
             if (this.currentDirection.length != 0) {
                 this.performActions(this.actions, 0);

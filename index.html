@@ -10,6 +10,7 @@
     
     <body>
         <h1 class="text-center">Robot Locator</h1>
+        <img class="logo" src="./images/robot.png">
         <span id="position-title">Original Position:</span> <span id="direction-title">Original Direction:</span>
         <form>
             <input id="origin-input" placeholder="[x, y]" onkeyup="myRobot.setPosition(true);" class="text-center" type="text">
@@ -23,7 +24,10 @@
         <div id="direction">Direction faced: </div>
         <canvas id="grid" width="435" height="435"></canvas> <br>  
         <span id="speed-text">Animation Speed: 100 ms</span><input id="slider" type="range" min="0" max="400" value="100" step="10" onchange="myRobot.changeSpeed()"/>
-        <img id="robot" src="./images/robot.png" width="50" height="50">
+        <img id="robotN" class="robot" src="./images/robotN.png" width="50" height="50">
+        <img id="robotS" class="robot" src="./images/robotS.png" width="50" height="50">
+        <img id="robotW" class="robot" src="./images/robotW.png" width="50" height="50">
+        <img id="robotE" class="robot" src="./images/robotE.png" width="50" height="50">
     
     <footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -22,7 +22,7 @@ class Board {
     }
     
     /* Update Board Visualization */
-    update(xPosition, yPosition) {
+    update(xPosition, yPosition, direction) {
         /* Convert to matrix indices */
         var row = 7 - (yPosition - 1);
         var col = xPosition - 1;
@@ -39,8 +39,14 @@ class Board {
         } else {
             this.ctx.fillStyle = "rgb(" + degree + ",75,100)";
         }
-        
-        var img = document.getElementById('robot');
+        var img = document.getElementById('robotN');
+        switch (direction) {
+            case 'N': img = document.getElementById('robotN'); break;
+            case 'S': img = document.getElementById('robotS'); break;
+            case 'W': img = document.getElementById('robotW'); break;
+            case 'E': img = document.getElementById('robotE'); break;
+            default: break;
+        }
         
         this.ctx.fillRect(col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
         this.ctx.drawImage (img, col*(this.size+this.offset), row*(this.size+this.offset), this.size, this.size);
