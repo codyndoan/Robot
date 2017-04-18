@@ -7,6 +7,7 @@ class Board {
         this.red = 0;
         this.green = 0;
         this.blue = 0;
+        this.i = 0;
         this.ctx = document.getElementById('grid').getContext('2d');
         this.size = 50;
         this.offset = 5;
@@ -27,16 +28,16 @@ class Board {
         var col = xPosition - 1;
         this.board[row][col]++;
         
-        var degree = this.red++*25;
-    
-        if (degree >= 240) {
-            var degree1 = this.green++*15;
-            var degree2 = this.blue++*10;
-            if (degree1 >= 150) degree1 = 150;
-            if (degree2 >= 200) degree2 = 200;
-            this.ctx.fillStyle = "rgb(240," + degree1 + "," + degree2+ ")";
+        /* RGB color cycle */
+        var degree = this.red++*13;
+        if (degree >= 255) {
+            var degree1 = 75 + this.green++*13;
+            var degree2 = 100 + this.blue++*10;
+            if (degree1 >= 240) degree1 -= 240;
+            if (degree2 >= 250) degree2 -= 250;
+            this.ctx.fillStyle = "rgb(255," + degree1 + "," + degree2+ ")";
         } else {
-            this.ctx.fillStyle = "rgb(" + degree + ",0,0)";
+            this.ctx.fillStyle = "rgb(" + degree + ",75,100)";
         }
         
         var img = document.getElementById('robot');
