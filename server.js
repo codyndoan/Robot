@@ -37,3 +37,19 @@ app.get('/scripts/board.js', function(req, res){
 app.get('/images/robot.png', function(req, res){
   res.sendFile(__dirname + '/images/robot.png');
 });
+
+app.get('/images/robotN.png', function(req, res){
+  res.sendFile(__dirname + '/images/robotN.png');
+});
+
+app.get('/images/robotS.png', function(req, res){
+  res.sendFile(__dirname + '/images/robotS.png');
+});
+
+app.get('/images/robotE.png', function(req, res){
+  res.sendFile(__dirname + '/images/robotE.png');
+});
+
+app.get('/images/robotW.png', function(req, res){
+  res.sendFile(__dirname + '/images/robotW.png');
+});
