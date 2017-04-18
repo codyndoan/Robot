@@ -9,6 +9,7 @@
     </head>
     
     <body>
+        <h1 class="text-center">Robot Locator</h1>
         <span id="position-title">Original Position:</span> <span id="direction-title">Original Direction:</span>
         <form>
             <input id="origin-input" placeholder="[x, y]" onkeyup="myRobot.setPosition(true);" class="text-center" type="text">
@@ -16,8 +17,8 @@
             <br><span id="action-title">Actions: [M]ove, [R]ight, [L]eft</span><br>
             <input id="action-input" placeholder="M, R, L" onkeyup="myRobot.setAction();" class="text-center" type="text">
         </form><br>
-        <button id="start-button" onclick="myRobot.begin();">begin</button>
-        <button id="reset-button" onclick="myRobot.begin(true);">reset</button><br><br>
+        <button id="start-button" onclick="myRobot.begin();">Go!</button>
+        <button id="reset-button" onclick="myRobot.begin(true);">Reset</button><br><br>
         <div id="location">Location: </div>
         <div id="direction">Direction faced: </div>
         <canvas id="grid" width="435" height="435"></canvas> <br>  
