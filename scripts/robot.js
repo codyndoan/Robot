@@ -30,6 +30,8 @@ class Robot {
         this.board = board;                                 // Board object
         
         this.speed = 0;
+        
+        this.actionLoop;         // function var set when performedActions is called
     }
     
     /* Function: setPosition
@@ -114,18 +116,31 @@ class Robot {
      *  Alerts user when inital position is incorrectly specified
      */
     begin(resetOnly) {
-        /* Reset board */
-        this.board.reset(this.originPosition, this.originDirection);
-        if (resetOnly) return;
+        /* Clear timeout of function on every reset or start */
+        if (this.actionLoop != undefined) clearTimeout(this.actionLoop);
         
+        /* Reset board on every reset or start */
+        this.board.reset(this.originPosition, this.originDirection);
+        
+        /* Only for reset */
+        if (resetOnly)  return;
+        
+        /* Set initial position and direction */
         this.setPosition(true);
         this.setDirection(this.originDirection, true);
+        
+        /* Update original position on page to correct format */
         document.getElementById('origin-input').value = this.originPosition;
         
-        /* Only move robot once, x and y have been set */
+        /* Only update board once x and y positions have been set else alert user*/
         if (this.xPosition != "x" && this.yPosition != "y" ) {
             this.board.update(this.xPosition, this.yPosition);
-            this.performActions(this.actions, this.currentDirection);
+            /* Only perform actions if an initial direction has been set else alert user */
+            if (this.currentDirection.length != 0) {
+                this.performActions(this.actions, 0);
+            } else {
+                alert("Direction has not been specified. Please enter either N, S, W, or E");
+            }
         } else {
             alert("Please enter a position in the form [x, y], where 0 < x,y < 9");
         }
@@ -133,7 +148,7 @@ class Robot {
     
     /* Function: performActions
      * Description: 
-     *  Iterates through robot's action input in the form of {M,L,R}*
+     *  Iterate recursively through robot's action input in the form of {M,L,R}*
      *  If current action is 'M', delgate to move() function. Else if specifying
      *  'R' or 'L', delegate to the turn function. 
      * Parameters:
@@ -142,25 +157,19 @@ class Robot {
      * Error Handling:
      *  Alerts user when initial direction is not specified.
      */
-    performActions(actions, direction) {
-        /* Let robot follow action path */
-        if (direction.length == 0) {
-            alert("Direction has not been specified. Please enter either N, S, W, or E");
-        } else {
-            for (var i = 0; i < actions.length; i++) {
-                setTimeout(function(actions, i) {
-                    var action = actions.charAt(i);
-                    if (action == 'M') this.move();
-                    if (action == 'L') this.turn(this.currentDirection, action);
-                    if (action == 'R') this.turn(this.currentDirection, action);
-                    if (i == actions.length - 1) {
-                        console.log(this.board.toString());
-                        console.log(document.getElementById("location").innerHTML);
-                        console.log(document.getElementById("direction").innerHTML);
-                    }
-                }.bind(this), this.speed*i, actions, i);
+    performActions(actions, index) {
+        this.actionLoop = setTimeout(function() {
+            var action = actions.charAt(index);
+            if (action == 'M') this.move();
+            if (action == 'L') this.turn(this.currentDirection, action);
+            if (action == 'R') this.turn(this.currentDirection, action);
+            if (index == actions.length - 1) {
+                console.log(this.board.toString());
+                console.log(document.getElementById("location").innerHTML);
+                console.log(document.getElementById("direction").innerHTML);
             }
-        }
+            if(++index < actions.length) this.performActions(actions, index);
+        }.bind(this), this.speed);
     }
     
     /* Function: move
