@@ -34,11 +34,11 @@ class Robot {
         this.actionLoop;         // function var set when performedActions is called
         
         /* Set up event handlers on click */
-        document.getElementById('start-button').on('click', function {
+        $('#start-button').on('click', function() {
             this.begin(false);                                           
         }.bind(this));
 
-        document.getElementById('reset-button').on('click', function {
+        $('#reset-button').on('click', function() {
             this.begin(true);                                           
         }.bind(this));
     }
