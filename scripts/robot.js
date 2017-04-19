@@ -147,7 +147,10 @@ class Robot {
         this.board.reset(this.originPosition, this.originDirection);
         
         /* Only for reset */
-        if (resetOnly)  return;
+        if (resetOnly)  {
+            console.log(this.board.toString());
+            return;
+        }
         
         /* Set initial position and direction */
         this.setPosition(true);

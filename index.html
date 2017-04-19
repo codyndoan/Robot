@@ -10,9 +10,9 @@
     
     <body>
         <h1 class="text-center">Robot Locator</h1>
-        <img class="logo" src="./images/robot.png">
+        <img class="logo animated fadeInRight" src="./images/robot.png">
         <span id="position-title">Original Position:</span> <span id="direction-title">Original Direction:</span>
-        <form>
+        <form >
             <input id="origin-input" placeholder="[x, y]" class="text-center" type="text">
             <input id="direction-input" placeholder="N, S, E, or W" class="text-center" type="text">
             <br><span id="action-title">Actions: [M]ove, [R]ight, [L]eft</span><br>
@@ -22,7 +22,7 @@
         <button id="reset-button">Reset</button><br><br>
         <div id="location">Location: </div>
         <div id="direction">Direction faced: </div>
-        <canvas id="grid" width="435" height="435"></canvas> <br>  
+        <canvas id="grid" class="animated fadeIn" width="435" height="435"></canvas> <br>  
         <span id="speed-text">Animation Speed: 100 ms</span><input id="slider" type="range" min="0" max="400" value="100" step="10" onchange="myRobot.changeSpeed()"/>
         <img id="robotN" class="robot" src="./images/robotN.png" width="50" height="50">
         <img id="robotS" class="robot" src="./images/robotS.png" width="50" height="50">

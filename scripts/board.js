@@ -39,6 +39,7 @@ class Board {
         } else {
             this.ctx.fillStyle = "rgb(" + degree + ",75,100)";
         }
+        
         var img = document.getElementById('robotN');
         switch (direction) {
             case 'N': img = document.getElementById('robotN'); break;
@@ -77,6 +78,5 @@ class Board {
         
         document.getElementById("location").innerHTML = "Location: " + originPosition;
         document.getElementById("direction").innerHTML = "Direction faced: " + originDirection;
-        console.log(this.toString());
     }
 }
