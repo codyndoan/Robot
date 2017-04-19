@@ -32,6 +32,15 @@ class Robot {
         this.speed = 0;
         
         this.actionLoop;         // function var set when performedActions is called
+        
+        /* Set up event handlers on click */
+        document.getElementById('start-button').on('click', function {
+            this.begin(false);                                           
+        });
+
+        document.getElementById('reset-button').on('click', function {
+            this.begin(true);                                           
+        });
     }
     
     /* Function: setPosition
