@@ -1,5 +1,5 @@
-# Robot
+# Robot Game Versions 1
 Mobivity Project
 
-(Tested on Google Chrome, Safari)
 https://robotlocator.herokuapp.com/
+(Tested on desktop Google Chrome, Safari)
