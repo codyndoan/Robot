@@ -34,13 +34,11 @@ class Robot {
         this.actionLoop;         // function var set when performedActions is called
         
         /* Set up event handlers on click */
-        $('#start-button').on('click touchstart', function(event) {
-            if (event.type == "touchstart") $(this).off('click');
+        $('#start-button').on('click touchstart', function() {
             this.begin(false);                                           
         }.bind(this));
 
-        $('#reset-button').on('click touchstart', function(event) {
-            if (event.type == "touchstart") $(this).off('click');
+        $('#reset-button').on('click touchstart', function() {
             this.begin(true);                                           
         }.bind(this));
         
