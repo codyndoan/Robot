@@ -36,11 +36,11 @@ class Robot {
         /* Set up event handlers on click */
         document.getElementById('start-button').on('click', function {
             this.begin(false);                                           
-        });
+        }.bind(this));
 
         document.getElementById('reset-button').on('click', function {
             this.begin(true);                                           
-        });
+        }.bind(this));
     }
     
     /* Function: setPosition
