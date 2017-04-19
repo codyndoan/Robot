@@ -34,12 +34,26 @@ class Robot {
         this.actionLoop;         // function var set when performedActions is called
         
         /* Set up event handlers on click */
-        $('#start-button').on('click', function() {
+        $('#start-button').on('click touchstart', function(event) {
+            if (event.type == "touchstart") $(this).off('click');
             this.begin(false);                                           
         }.bind(this));
 
-        $('#reset-button').on('click', function() {
+        $('#reset-button').on('click touchstart', function(event) {
+            if (event.type == "touchstart") $(this).off('click');
             this.begin(true);                                           
+        }.bind(this));
+        
+        $('#origin-input').on('keyup input', function() {
+            this.setPosition(true);                                       
+        }.bind(this));
+        
+        $('#direction-input').on('keyup input', function() {
+            this.setDirection(document.getElementById('direction-input').value, true);                                           
+        }.bind(this));
+        
+        $('#action-input').on('keyup input', function() {
+            this.setAction();                                         
         }.bind(this));
     }
     
